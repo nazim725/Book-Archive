@@ -7,9 +7,8 @@ const searchBooks=()=>{
     fetch(url)
     .then(res=>res.json())
     .then(data=>{
-        const booksdetails=displayBooksdetails(data.docs.slice(0,20));
-        const numberFound=displayNumber(data.numFound);
-        
+    const booksdetails=displayBooksdetails(data.docs.slice(0,20));
+    const numberFound=displayNumber(data.numFound);   
     })
 
     inputField.value=''
@@ -27,7 +26,9 @@ const displayBooksdetails=(books)=>{
         div.classList.add('col');
         div.innerHTML=`
         <div class="card h-100 p-4 shadow rounded rounded-3 mx-4 bg-primary text-white border border-3">
-        <img  src="${path}" height="300"></img>
+        <div id='missing-img' class="img-fluid">
+        <img src="${path}" height="300" width="380"></img>
+        </div>
         <div class="card-body">
         <p class="fw-bold"><span> <h3> Book Name:</h3> </span>${element.title} </p>
         <p class="fw-bold"><span> <h3> Authors Name:</h3> </span>${element.author_name} </p>
@@ -51,7 +52,7 @@ const displayNumber=(numbers)=>{
     h5.classList.add( 'w-50','mx-auto','text-center','text-white','p-3')
     h5.classList.add()
     h5.innerText=`Total Search Result Found: ${numbers}`;
-    if(numbers==0){
+    if(numbers===0){
         h5.innerText=` Sorry, No Matched Result
         please Input a Right Books Name!!!!!`; 
     }
